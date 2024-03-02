@@ -9,6 +9,8 @@ class BaseManualModel(ABC):
     """Base machine learning model class."""
 
     def __init__(self):
+        self.x_train: ndarray
+        self.y_train: ndarray
         basicConfig(format="Model: %(message)s", level=INFO)
 
     @abstractmethod

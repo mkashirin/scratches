@@ -9,7 +9,10 @@ class BaseSolver(ABC):
     """Abstract base solver class to be inherited by other solvers."""
 
     def __init__(self):
-        pass
+        self.coefficient_matrix: ndarray
+        self.scalars_vector: ndarray
+        self.augmented_matrix: ndarray
+        self.solution_vector: ndarray
 
     @abstractmethod
     def fit(
