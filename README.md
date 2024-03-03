@@ -41,3 +41,7 @@ The only concrete suggestion is not to use it outside of the educational domain.
 In case You're not getting something, don't worry. The docstrings in the source code can be considered comprehensive documentation. The code is also written in a very concise manner and strongly oriented on readability, rather than compactness.
 
 Now go ahead and play with machine learning algorithms! Mix and match all the avalible structures to build Your own neural networks! Explore the source code for deeper understanding of the foundamental ML and AI concepts!
+
+## Licence
+
+This project is distributed under the MIT open source licence.
