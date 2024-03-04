@@ -118,6 +118,3 @@ class BaseLayer(ABC):
                 )
                 raise ValueError(message)
         return scale
-
-
-class RecurrentLayer(ABC): pass
