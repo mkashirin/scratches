@@ -1,20 +1,20 @@
 # Scratches
 
-Scratches is the reverse engineering project inspired by the Deep Learning from Scratch — Building with Python from First Principles by Seth Weidman. Here You can find pure Python and NumPy implementations of the classic machine learning algorithms, such as: K-Nearest Neighbours, Linear and Multiple Regressions, elementary and convolutional neural networks.
+Scratches is a project that is inspired by the "Deep Learning from Scratch" book by Seth Weidman, which provides a comprehensive guide to creating deep learning models from scratch using Python and NumPy. The project aims to provide pure Python and NumPy implementations of classic machine learning algorithms such as k-nearest neighbors, linear and multiple regressions, and elementary and convolutional neural networks.
 
 ## Requirements
 
-The only system requirement is to use Conda, Miniconda as Your Python package manager.
+The only system requirement for this application is that you use Conda or Miniconda to manage your Python packages.
 
 ## Installation and usage
 
-Use the Git CLI to clone this repository into Your working directory with the following command:
+Use the Git command-line interface (CLI) to clone this repository into your working directory using the following command:
 
 ```
 git clone https://github.com/mkashirin/scratches
 ```
 
-Set up the virlual environment by running the lines below:
+To create a virtual environment, please follow the lines below:
 
 ```
 conda init
@@ -22,9 +22,9 @@ conda env create --file environment.yml --name scratches
 conda activate scratches
 ```
 
-Although NumPy is the only robust dependency for the algorithms to work, there're also Jupyter, Matplotlib and Pandas in the environment to provide plug and play experience.
+Although NumPy is a crucial dependency for the functioning of the algorithms, Jupiter, Matplotlib, and Pandas are also present in the environment in order to provide a seamless experience.
 
-Also if you want to change the path for the environment, edit the `prefix` in the **environment.yml** file (default is `~/anaconda3/envs/scratches`).
+If you wish to change the default path for your environment, you can edit the "prefix" value in the "environment.yml" file (the default location is "~/anaconda3/envs/scratches").
 
 After that You can just run the Jupyter sever to access the notebooks from the **examples** directory by executing the following command:
 
@@ -32,15 +32,15 @@ After that You can just run the Jupyter sever to access the notebooks from the *
 jupyter lab
 ```
 
-And that's it, You're all set!
+And that's it. You are all set!
 
 ## Suggestions
 
-The only concrete suggestion is not to use it outside of the educational domain. 
+The only specific suggestion is to not use it outside the educational context.
 
-In case You're not getting something, don't worry. The docstrings in the source code can be considered comprehensive documentation. The code is also written in a very concise manner and strongly oriented on readability, rather than compactness.
+If you are still unsure, do not worry. The documentation in the source code can be considered sufficient. The code has been written in a clear and concise manner, focusing on readability rather than efficiency.
 
-Now go ahead and play with machine learning algorithms! Mix and match all the avalible structures to build Your own neural networks! Explore the source code for deeper understanding of the foundamental ML and AI concepts!
+So, feel free to experiment with machine learning models! Combine various structures to create your own neural networks. Explore the code to gain a deeper understanding of fundamental ML and AI principles.
 
 ## Licence
 
