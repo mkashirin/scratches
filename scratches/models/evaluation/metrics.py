@@ -156,7 +156,7 @@ def compute_sensitivities_and_specificities(
 
     :returns: NumPy :class:`ndarray` or dictionary of sensitivities and
     specificities (depends on :parameter:`as_array`).
-        :rtype: :class:`ndarray`
+        :rtype: :class:`Any`
 
     :raises ValueError: If actual and predicted arrays have 
     non-broadcasting shapes.
