@@ -12,7 +12,7 @@ class MSEEvaluator(BaseEvaluator):
     evaluator.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
     def _apply(self) -> Any:
@@ -36,13 +36,13 @@ class MSEEvaluator(BaseEvaluator):
 
 
 class SoftmaxCEEvaluator(BaseEvaluator):
-    """Class for defining the Softmax Cross Entropy loss function as an 
+    """Class for defining the Softmax Cross Entropy loss function as an
     evaluator.
     """
 
     epsilon = float(np.finfo(float).eps)
 
-    def __init__(self, epsilon: float = epsilon):
+    def __init__(self, epsilon: float = epsilon) -> None:
         super().__init__()
         self.epsilon = epsilon
         self.single_class = False
@@ -61,7 +61,7 @@ class SoftmaxCEEvaluator(BaseEvaluator):
         return np.exp(array - logsumexp(array, axis=axis, keepdims=True))
 
     def _apply(self) -> Any:
-        """Apply the Softmax Cross Entropy loss function and return the 
+        """Apply the Softmax Cross Entropy loss function and return the
         computed loss value.
         """
         if self.actual.shape[0] == 1:

@@ -15,7 +15,7 @@ class KNNClassificationManualModel(BaseManualModel):
     L2 (Euclidean) distance.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.weights_map: Optional[Dict[int, int]]
 
@@ -24,13 +24,13 @@ class KNNClassificationManualModel(BaseManualModel):
         memorizing the training data.
 
         :parameter x_train: Train selection of features values.
-            :type x_train: ndarray
+            :type x_train: :class:`ndarray`
         :parameter y_train: Train selection of target values.
-            :type y_train: ndarray
+            :type y_train: :class:`ndarray`
 
-        :raises: ``ValueError`` if x and y do not pass validation conditions,
-            expressed in ``_validate_shapes()`` method of the
-            BaseManualModel class.
+        :raises ValueError: If `x` and `y` do not pass validation conditions,
+        expressed in :method:`_validate_shapes()` method of the 
+        :class:`BaseManualModel` class.
         """
         super().fit(x_train, y_train)
 
@@ -43,28 +43,28 @@ class KNNClassificationManualModel(BaseManualModel):
     ) -> ndarray:
         """Predict labels for test data using this classifier.
         The data passed to this method would be copied and used as
-        NumPy ``ndarray``.
+        NumPy :class:`ndarray`.
 
         :parameter x_test: Test selection of x (set x) values.
-            :type x_test: ndarray
+            :type x_test: :class:`ndarray`
 
-        :keyword n_neighbors: Number of neighbors to account distance to;
-            :type n_neighbors: int
+        :keyword n_neighbors: Number of neighbors to account distance to.
+            :type n_neighbors: :class:`int`
         :keyword n_loops: Number of loops used within the distances
-            calculation process;
-            :type n_loops: int
+        calculation process.
+            :type n_loops: :class:`int`
         :keyword weight_map: A dictionary which maps indices of neighbors to
-            their weight.
-            :type weight_map: Optional[Dict[int, int]]
+        their weight.
+            :type weight_map: :class:`Optional[Dict[int, int]]`
 
         :returns: Array of predicted labels.
-            :rtype: ndarray
+            :rtype: :class:`ndarray`
         """
 
         if weight_map is not None and len(weight_map) != n_neighbors:
             message = (
-                f"The number of weights in ``weight_map`` and the number "
-                f"``n_neighbors`` must be the same"
+                f"The number of weights in `weight_map` and the number "
+                f"`n_neighbors` must be the same"
             )
             raise ValueError(message)
         predicting_start_time = perf_counter()
@@ -140,7 +140,7 @@ class KNNClassificationManualModel(BaseManualModel):
         closest_neighbors: list, weight_map: Dict[int, int]
     ) -> list:
         """Add more weight for a certain neighbor according to the
-        `weight_map`.
+        :parameter:`weight_map`.
         """
         weighted_list = list()
         for i, value in enumerate(closest_neighbors):
@@ -159,17 +159,17 @@ class KNNClassificationManualModel(BaseManualModel):
     ) -> ndarray:
         """Predict labels for each test point.
 
-        :parameter distances: Array of distances between data points;
-            :type distances: ndarray
+        :parameter distances: Array of distances between data points.
+            :type distances: :class:`ndarray`
         :parameter n_neighbors: Number of neighbors to account distance to.
-            :type n_neighbors: int
+            :type n_neighbors: :class:`int`
 
         :keyword weight_map: A dictionary which maps indices of neighbors to
-            their weight.
-            :type weight_map: Optional[Dict[int, int]]
+        their weight.
+            :type weight_map: :class:`Optional[Dict[int, int]]`
 
         :return: Array of labels predicted based on nearest neighbors.
-            :rtype: ndarray
+            :rtype: :class:`ndarray`
         """
         n_test_samples = distances.shape[0]
         y_predicted = np.zeros((n_test_samples, 1))

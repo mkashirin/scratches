@@ -11,7 +11,7 @@ class GaussianEliminationBaseSolver(BaseSolver):
     method with partial pivoting.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
     def _eliminate(self, iteration: int, rows: int) -> None:
@@ -48,12 +48,12 @@ class GaussianEliminationBaseSolver(BaseSolver):
         and scalars vector has only one column before fitting.
 
         :parameter coefficient_matrix: Matrix of coefficients.
-            :type coefficient_matrix: ndarray
-        :parameter scalars_vector: column vector of scalars vector.
-            :type scalars_vector: ndarray
+            :type coefficient_matrix: :class:`ndarray`
+        :parameter scalars_vector: Column vector of scalars vector.
+            :type scalars_vector: :class:`ndarray`
 
-        :returns: ``None``
-            :rtype: NoneType
+        :returns: :data:`None`
+            :rtype: :class:`NoneType`
         """
         super().fit(coefficient_matrix, scalars_vector)
 
@@ -61,11 +61,11 @@ class GaussianEliminationBaseSolver(BaseSolver):
         """Solve the independent system of linear equations.
 
         :parameter round_to: Number of decimals to which solution should be
-            rounded.
-            :type round_to: int
+        rounded.
+            :type round_to: :class:`int`
 
         :returns: Solution matrix for the given system of linear equations.
-            :rtype: ndarray
+            :rtype: :class:`ndarray`
         """
         rows = len(self.scalars_vector)
         index = rows - 1
@@ -105,13 +105,13 @@ class LeastSquaresSolver(GaussianEliminationBaseSolver):
         """Perform computations to transform given matrices in appropriate for
         GaussianEliminationBaseSolver form.
 
-        :parameter coefficient_matrix: Matrix of coefficients
-            :type coefficient_matrix: ndarray
-        :parameter scalars_vector: column vector of scalars vector
-            :type scalars_vector: ndarray
+        :parameter coefficient_matrix: Matrix of coefficients.
+            :type coefficient_matrix: :class:`ndarray`
+        :parameter scalars_vector: Column vector of scalars vector.
+            :type scalars_vector: :class:`ndarray`
 
-        :returns: ``None``
-            :rtype: NoneType
+        :returns: :data:`None`
+            :rtype: :class:`NoneType`
         """
         transposed = coefficient_matrix.T
         self.coefficient_matrix = transposed @ coefficient_matrix
@@ -123,11 +123,11 @@ class LeastSquaresSolver(GaussianEliminationBaseSolver):
         Elimination method.
 
         :parameter round_to: Number of decimals to which solution should be
-            rounded
-            :type round_to: int
+        rounded.
+            :type round_to: :class:`int`
 
-        :returns: Solution matrix for the given system of linear equations
-            :rtype: ndarray
+        :returns: Solution matrix for the given system of linear equations.
+            :rtype: :class:`ndarray`
         """
         self.solution_vector = super().solve(round_to=round_to)
         return self.solution_vector

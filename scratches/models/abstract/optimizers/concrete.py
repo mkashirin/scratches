@@ -15,7 +15,7 @@ class SGDOptimizer(BaseOptimizer):
         learning_rate: float = 0.01,
         final_learning_rate: float = 0.0,
         decay_type: Optional[DecayType] = None,
-    ):
+    ) -> None:
         super().__init__(learning_rate, final_learning_rate, decay_type)
 
     def step(self) -> None:
@@ -41,15 +41,14 @@ class SGDMomentumOptimizer(BaseOptimizer):
         final_learning_rate: float = 0,
         decay_type: Optional[DecayType] = None,
         momentum: float = 0.9,
-    ):
+    ) -> None:
         super().__init__(learning_rate, final_learning_rate, decay_type)
         self.momentum = momentum
         self.velocities: List[ndarray]
 
     def step(self) -> None:
-        """Does the same as the default SGD optimizer's ``step()`` function,
-        but in a more sophicsticated way
-        (regulating the learning rate value).
+        """Does the same as the default SGD optimizer's :method:`step()` function,
+        but in a more sophicsticated way (regulating the learning rate value).
         """
 
         if self.first:

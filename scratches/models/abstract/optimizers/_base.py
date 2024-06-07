@@ -15,7 +15,7 @@ class BaseOptimizer(ABC):
         learning_rate: float = 0.01,
         final_learning_rate: float = 0.0,
         decay_type: Optional[DecayType] = None,
-    ):
+    ) -> None:
         self.first = True
         self.learning_rate = learning_rate
         self.final_learning_rate = final_learning_rate
@@ -37,7 +37,7 @@ class BaseOptimizer(ABC):
 
     @abstractmethod
     def _update_rule(self, **kwargs) -> None:
-        message = "Every optimizer must implement the  _update_rule() method"
+        message = "Every optimizer must implement the  `_update_rule()` method"
         raise NotImplementedError(message)
 
     def _setup_decay(self) -> None:

@@ -7,7 +7,7 @@ from numpy import ndarray
 class BaseOperator(ABC):
     """Abstract base class for operators that process input data."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.input_: ndarray
         self.output_: ndarray
         self.input_gradient: ndarray
@@ -26,20 +26,20 @@ class BaseOperator(ABC):
     @abstractmethod
     def _apply(self) -> Any:
         """Abstract method to apply the operator."""
-        message = "Any Operator must implement ``_apply()`` method"
+        message = "Any Operator must implement `_apply()` method"
         raise NotImplementedError(message)
 
     @abstractmethod
     def _compute_gradient(self, output_gradient: ndarray) -> Any:
         """Abstract method to compute the gradient of the operator."""
-        message = "Any Operator must implement ``_gradient()`` method"
+        message = "Any Operator must implement `_gradient()` method"
         raise NotImplementedError(message)
 
 
 class ParameterizedOperator(BaseOperator):
     """Abstract base class for parameterized operators."""
 
-    def __init__(self, parameter: ndarray):
+    def __init__(self, parameter: ndarray) -> None:
         super().__init__()
         self.parameter = parameter
         self.parameterized_gradient: ndarray
@@ -56,15 +56,17 @@ class ParameterizedOperator(BaseOperator):
     def _compute_gradient(self, output_gradient: ndarray) -> Any:
         """Abstract method to compute the gradient of the operator."""
         message = (
-            "Any ParameterizedOperator must implement ``_apply()`` method"
+            "Any ParameterizedOperator must implement `_apply()` method"
         )
         raise NotImplementedError(message)
 
     @abstractmethod
     def _compute_parameterized_gradient(self, output_gradient: ndarray) -> Any:
-        """Abstract method to compute the parameterized gradient of the operator."""
+        """Abstract method to compute the parameterized gradient of the 
+        operator.
+        """
         message = (
             "Any ParameterizedOperator must implement"
-            "``_parameterized_gradient()`` method"
+            "`_parameterized_gradient()` method"
         )
         raise NotImplementedError(message)

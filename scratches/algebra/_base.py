@@ -8,7 +8,7 @@ from numpy import ndarray
 class BaseSolver(ABC):
     """Abstract base solver class to be inherited by other solvers."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.coefficient_matrix: ndarray
         self.scalars_vector: ndarray
         self.augmented_matrix: ndarray
@@ -30,7 +30,7 @@ class BaseSolver(ABC):
     @abstractmethod
     def solve(self, *, round_to: Optional[int] = None) -> Any:
         """Abstract method for solving the system of linear equations."""
-        message = "Every solver must implement the ``solve()`` method"
+        message = "Every solver must implement the `solve()` method"
         raise NotImplementedError(message)
 
     def _apply_partial_pivoting(self, iteration: int, rows: int) -> ndarray:

@@ -9,7 +9,7 @@
 # the **abstract** module.
 
 
-from typing import Dict, Optional
+from typing import Any, Dict, Optional
 
 import numpy as np
 from numpy import ndarray
@@ -24,7 +24,7 @@ class LayeredRegressionManualModel(LinearRegressionManualModel):
     Prototype of neural networks build using manually calculated derivatives.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
     def fit(
@@ -37,36 +37,38 @@ class LayeredRegressionManualModel(LinearRegressionManualModel):
         batch_size: int = 100,
         random_seed: Optional[int] = None,
         **kwargs
-    ) -> None:
-        """Train a layered regression model for a specified number of iterations
-        using gradient descent to adjust the curve. There is also a
-        possibility to change the number of neurons in hidden layer by
-        passing additional `hidden_size` keyword argument.
+    ) -> Any:
+        """Train a layered regression model for a specified number of 
+        iterations using gradient descent to adjust the curve. There is 
+        also a possibility to change the number of neurons in hidden layer by
+        passing additional :keyword:`hidden_size` keyword argument.
 
-        :parameter x_train: Train selection of features values;
-            :type x_train: ndarray
+        :parameter x_train: Train selection of features values.
+            :type x_train: :class:`ndarray`
         :parameter y_train: Train selection of target values.
-            :type y_train: ndarray
+            :type y_train: :class:`ndarray`
 
         :keyword n_iterations: Number of iterations that model will
-            cycle through;
-            :type n_iterations: int
+        cycle through.
+            :type n_iterations: :class:`int`
         :keyword learning_rate: Multiplicative coefficient of learning rate
-            (describes how fast model will move towards minima);
-            :type learning_rate: float
+        (describes how fast model will move towards minima).
+            :type learning_rate: :class:`float`
         :keyword batch_size: Size of one single batch that model will account
-            throughout one iteration;
-            :type batch_size: int
-        :keyword random_seed: Random seed defined for the train process;
-            :type random_seed: Optional[int]
+        throughout one iteration.
+            :type batch_size: :class:`int`
+        :keyword random_seed: Random seed defined for the train process.
+            :type random_seed: :class:`Optional[int]`
         :keyword hidden_size: Number of hidden layers in the model
-            (equal to the number of x by default).
+        (equal to the number of x by default).
+            :type hidden_size: :class:`int`
 
-        :returns: Training statistics if ``True`` is passed to one of the
-            `keep_loss` or `keep_weights` parameter, ``None`` otherwise.
-            :rtype: Any
+        :returns: Training statistics if :data:`True` is passed to one of the
+        :keyword:`keep_loss` or :keyword:`keep_weights`, :data:`None` 
+        otherwise.
+            :rtype: :class:`Any`
 
-        :raises: ``ValueError`` if train selections have different length
+        :raises ValueError: If train selections have different length.
         """
 
         super().fit(
@@ -84,10 +86,10 @@ class LayeredRegressionManualModel(LinearRegressionManualModel):
         curve to your data.
 
         :parameter x_test: Test selection of features values
-            :type x_test: ndarray
+            :type x_test: :class:`ndarray`
 
         :returns: Array of predicted target values
-            :rtype: ndarray
+            :rtype: :class:`ndarray`
         """
 
         input_product = np.dot(x_test, self.weights_map_["input_weights"])
@@ -162,7 +164,7 @@ class LayeredRegressionManualModel(LinearRegressionManualModel):
         self, computational_meta: Dict[str, ndarray]
     ) -> WeightsMap:
         """Compute new gradients and evaluate them at the given in
-        ``ComputationalMetadata`` points for a linear regression model
+        :class:`ComputationalMetadata` points for a linear regression model
         (all differentiation has been done manually and then hard-coded).
         """
         loss_over_predictions = -(

@@ -19,7 +19,7 @@ class LinearRegressionManualModel(BaseManualModel):
     method of the Least Squares.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
     def fit(
@@ -37,30 +37,30 @@ class LinearRegressionManualModel(BaseManualModel):
         """Train a linear regression model for a specified number of
         iterations using gradient descent or algebraic resolution.
 
-        :parameter x_train: Train selection of x (x) values;
-            :type x_train: ndarray
-        :parameter y_train: Train selection of y (y) values.
-            :type y_train: ndarray
+        :parameter x_train: Train selection of features values.
+            :type x_train: :class:`ndarray`
+        :parameter y_train: Train selection of target values.
+            :type y_train: :class:`ndarray`
 
-        :keyword n_iterations: Number of iterations for model cycling;
-            :type n_iterations: int
+        :keyword n_iterations: Number of iterations for model cycling.
+            :type n_iterations: :class:`int`
         :keyword learning_rate: Multiplicative coefficient of the learning
-            rate, describing the speed of model movement towards minima;
-            :type learning_rate: float
+        rate, describing the speed of model movement towards minima.
+            :type learning_rate: :class:`float`
         :keyword batch_size: Size of a single batch that the model will
-            account for throughout one iteration;
-            :type batch_size: int
-        :keyword random_seed: Random seed defined for replication;
-            :type random_seed: Optional[int]
+        account for throughout one iteration.
+            :type batch_size: :class:`int`
+        :keyword random_seed: Random seed defined for replication.
+            :type random_seed: :class:`Optional[int]`
         :keyword solve_algebraically: If True, the model will resolve the
-            weights by solving the system of linear equations using the
-            Least Squares method; otherwise, will continue adjusting the
-            weights with gradient descent.
-            :type solve_algebraically: bool
+        weights by solving the system of linear equations using the
+        Least Squares method; otherwise, will continue adjusting the
+        weights with gradient descent.
+            :type solve_algebraically: :class:`bool`
 
-        :raises: ``ValueError`` if x and y do not pass validation conditions,
-            expressed in ``_validate_shapes()`` method of
-            the BaseManualModel class.
+        :raises ValueError: If x and y do not pass validation conditions,
+            expressed in :method:`_validate_shapes()` method of
+            the :class:`BaseManualModel` class.
         """
 
         super().fit(x_train, y_train)
@@ -141,11 +141,11 @@ class LinearRegressionManualModel(BaseManualModel):
     def predict(self, x_test: ndarray) -> ndarray:
         """Make predictions with the trained linear regression model.
 
-        :parameter x_test: Test selection of x (x) values.
-            :type x_test: ndarray
+        :parameter x_test: Test selection of features values.
+            :type x_test: :class:`ndarray`
 
-        :returns: Array of predicted y values.
-            :rtype: ndarray
+        :returns: Array of predicted target values.
+            :rtype: :class:`ndarray`
         """
 
         product = np.dot(x_test, self.weights_map_["weights"])
@@ -160,7 +160,9 @@ class LinearRegressionManualModel(BaseManualModel):
         batch_size: int,
         batch_start: int = 0,
     ) -> SamplesBatch:
-        """Generate a batch for training starting from the `start` position."""
+        """Generate a batch for training starting from the 
+        :parameter:`batch_start` position.
+        """
         if batch_start + batch_size > x_train.shape[0]:
             batch_size = x_train.shape[0] - batch_start
         batch_end = batch_start + batch_size
@@ -214,7 +216,7 @@ class LinearRegressionManualModel(BaseManualModel):
         self, computational_meta: Dict[str, ndarray]
     ) -> WeightsMap:
         """Compute new gradients and evaluate them at the given in
-        ``ComputationalMetadata`` points for a linear regression model
+        :class:`ComputationalMetadata` points for a linear regression model
         (all differentiation has been done manually and then hard-coded).
         """
         loss_over_predictions = -2 * (

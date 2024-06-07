@@ -5,24 +5,24 @@ from numpy import ndarray
 
 
 class BasePreprocessor(ABC):
-    """The BasePreprocessor class is an abstract base class for preprocessor
+    """The Base Preprocessor class is an abstract base class for preprocessor
     implementations.
     """
 
-    def __init__(self, copy: bool = True):
+    def __init__(self, copy: bool = True) -> None:
         self.copy = copy
 
     @abstractmethod
     def fit(self, x) -> None:
         """Fit the preprocessor to the provided features."""
-        message = "Every preprocessor must implement the ``fit()`` method."
+        message = "Every preprocessor must implement the `fit()` method."
         raise NotImplementedError(message)
 
     @abstractmethod
     def transform(self, x) -> Any:
         """Transform the input features."""
         message = (
-            "Every preprocessor must implement the ``transform()`` method."
+            "Every preprocessor must implement the `transform()` method."
         )
         raise NotImplementedError(message)
 

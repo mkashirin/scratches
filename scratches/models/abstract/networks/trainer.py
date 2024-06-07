@@ -14,7 +14,9 @@ from ..optimizers._base import BaseOptimizer
 class Trainer:
     """A class for training neural networks."""
 
-    def __init__(self, network: NeuralNetwork, optimizer: BaseOptimizer):
+    def __init__(
+        self, network: NeuralNetwork, optimizer: BaseOptimizer
+    ) -> None:
         self.network = network
         self.optimizer = optimizer
         self.best_loss = float_info.max
@@ -42,25 +44,25 @@ class Trainer:
     ) -> None:
         """Fits the neural network to the training data.
 
-        :parameter x_train: The features training data;
-            :type x_train: ndarray
-        :parameter x_valid: The features validating data;
-            :type x_valid: ndarray
-        :parameter y_train: The target training data;
-            :type y_train: ndarray
+        :parameter x_train: The features training data.
+            :type x_train: :class:`ndarray`
+        :parameter x_valid: The features validating data.
+            :type x_valid: :class:`ndarray`
+        :parameter y_train: The target training data.
+            :type y_train: :class:`ndarray`
         :parameter y_valid: The target validating data.
-            :type y_valid: ndarray
+            :type y_valid: :class:`ndarray`
 
-        :keyword epochs: The number of training epochs;
-            :type epochs: int
-        :keyword evaluate_every: Evaluate the model every n epochs;
-            :type evaluate_every: int
-        :keyword batch_size: The batch size for training;
-            :type batch_size: int
-        :keyword random_seed: The random seed for reproducibility;
-            :type random_seed: Optional[int]
+        :keyword epochs: The number of training epochs.
+            :type epochs: :class:`int`
+        :keyword evaluate_every: Evaluate the model every n epochs.
+            :type evaluate_every: :class:`int`
+        :keyword batch_size: The batch size for training.
+            :type batch_size: :class:`int`
+        :keyword random_seed: The random seed for reproducibility.
+            :type random_seed: :class:`Optional[int]`
         :keyword restart: Whether to restart the training.
-            :type restart: bool
+            :type restart: :class:`bool`
         """
 
         # fmt: off
@@ -93,7 +95,7 @@ class Trainer:
                 valid_loss = self.network.loss_function.feed_forward(
                     self.y_valid, predicted
                 )
-                
+
                 if valid_loss < self.best_loss or stop_early != True:
                     self.best_loss = valid_loss
                     info(
@@ -154,6 +156,4 @@ class Trainer:
                 batch_loss = self.network.loss_function.feed_forward(
                     y_batch, batch_predicted
                 )
-                info(
-                    f"Loss after {batch_number + 1} batches is {batch_loss}."
-                )
+                info(f"Loss after {batch_number + 1} batches is {batch_loss}.")

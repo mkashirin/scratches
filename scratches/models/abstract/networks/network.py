@@ -19,15 +19,15 @@ class NeuralNetwork:
         """Initialize the NeuralNetwork with layers, loss function, and an
         optional random seed.
 
-        :parameter layers: The layers of the neural network;
-            :type layers: Dict[str, BaseLayer]
+        :parameter layers: The layers of the neural network.
+            :type layers: :class:`Dict[str, BaseLayer]`
         :parameter loss_function: The loss function used for training the
-            network.
-            :type loss_function: BaseEvaluator
+        network.
+            :type loss_function: :class:`BaseEvaluator`
 
         :keyword random_seed: The random seed for reproducibility, defaults
-            to ``None``.
-            :type random_seed: int
+        to :data:`None`.
+            :type random_seed: :class:`int`
         """
         self.layers = layers
         self.loss_function = loss_function
@@ -38,14 +38,14 @@ class NeuralNetwork:
                 setattr(layer, "random_seed", random_seed)
 
     def feed_forward(self, x_input: ndarray) -> ndarray:
-        """Passes the input batch forward through the neural network and 
+        """Passes the input batch forward through the neural network and
         returns the output.
 
         :parameter x_input: The input features to pass to the neural network.
-            :type x_input: ndarray
+            :type x_input: :class:`ndarray`
 
         :returns: The output of the neural network (predictions).
-            :rtype: ndarray
+            :rtype: :class:`ndarray`
         """
         x_output = x_input
         for layer in self.layers.values():
@@ -56,7 +56,7 @@ class NeuralNetwork:
         """Propagates the loss gradient backward through the neural network.
 
         :parameter loss_gradient: The gradient of the loss function.
-            :type loss_gradient: ndarray
+            :type loss_gradient: :class:`ndarray`
         """
         gradient = loss_gradient
         for layer in reversed(self.layers.values()):
@@ -67,12 +67,12 @@ class NeuralNetwork:
         loss value.
 
         :parameter x_batch: The input batch for training;
-            :type x_batch: ndarray
+            :type x_batch: :class:`ndarray`
         :parameter y_batch: The target output batch for training.
-            :type y_batch: ndarray
+            :type y_batch: :class:`ndarray`
 
         :returns: The loss value after training
-            :rtype: float
+            :rtype: :class:`float`
         """
         predicted = self.feed_forward(x_batch)
         loss_value = self.loss_function.feed_forward(y_batch, predicted)

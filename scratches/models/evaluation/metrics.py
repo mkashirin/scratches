@@ -10,16 +10,16 @@ from ..._typing import ConfusionMatrix, IndicesMap
 def compute_mean_absolute_error(actual: ndarray, predicted: ndarray) -> float:
     """Compute mean absolute error metric for regression model predictions.
 
-    :parameter actual: Actual target values
-        :type actual: ndarray
-    :parameter predicted: Predicted target values
-        :type predicted: ndarray
+    :parameter actual: Actual target values.
+        :type actual: :class:`ndarray`
+    :parameter predicted: Predicted target values.
+        :type predicted: :class:`ndarray`
 
-    :return: Mean absolute error of the model
-        :rtype: float
+    :return: Mean absolute error of the model.
+        :rtype: :class:`float`
 
-    :raises ValueError: If actual and predicted arrays have
-        non-broadcasting shapes
+    :raises ValueError: If actual and predicted arrays have 
+    non-broadcasting shapes.
     """
     error = float(np.mean(np.abs(actual - predicted)))
     return error
@@ -29,16 +29,16 @@ def compute_mean_squared_error(actual: ndarray, predicted: ndarray) -> float:
     """Compute root mean squared error metric for regression model
     predictions.
 
-    :parameter actual: Actual target values
-        :type actual: ndarray
-    :parameter predicted: Predicted target values
-        :type predicted: ndarray
+    :parameter actual: Actual target values.
+        :type actual: :class:`ndarray`
+    :parameter predicted: Predicted target values.
+        :type predicted: :class:`ndarray`
 
-    :return: Mean squared error of the model
-        :rtype: float
+    :return: Mean squared error of the model.
+        :rtype: :class:`float`
 
-    :raises ValueError: If actual and predicted arrays have
-        non-broadcasting shapes
+    :raises ValueError: If actual and predicted arrays have 
+    non-broadcasting shapes.
     """
     error = float(np.mean(np.power(actual - predicted, 2)))
     return error
@@ -50,16 +50,16 @@ def compute_root_mean_squared_error(
     """Compute root mean squared error metric for regression model
     predictions.
 
-    :parameter actual: Actual target values
-        :type actual: ndarray
-    :parameter predicted: Predicted target values
-        :type predicted: ndarray
+    :parameter actual: Actual target values.
+        :type actual: :class:`ndarray`
+    :parameter predicted: Predicted target values.
+        :type predicted: :class:`ndarray`
 
-    :returns: Root of mean squared error of the model
-        :rtype: float
+    :returns: Root of mean squared error of the model.
+        :rtype: :class:`float`
 
-    :raises ValueError: If actual and predicted arrays have
-        non-broadcasting shapes
+    :raises ValueError: If actual and predicted arrays have 
+    non-broadcasting shapes.
     """
     error = np.sqrt(compute_mean_squared_error(actual, predicted))
     return error
@@ -68,16 +68,16 @@ def compute_root_mean_squared_error(
 def compute_accuracy(actual: ndarray, predicted: ndarray) -> float:
     """Compute accuracy for any model predictions.
 
-    :parameter actual: Actual target values
-        :type actual: ndarray
-    :parameter predicted: Predicted target values
-        :type predicted: ndarray
+    :parameter actual: Actual target values.
+        :type actual: :class:`ndarray`
+    :parameter predicted: Predicted target values.
+        :type predicted: :class:`ndarray`
 
-    :returns: Accuracy score of the model (% of correct predictions)
-        :rtype: float
+    :returns: Accuracy score of the model (% of correct predictions).
+        :rtype: :class:`float`
 
-    :raises ValueError: If actual and predicted arrays have
-        non-broadcasting shapes
+    :raises ValueError: If actual and predicted arrays have 
+    non-broadcasting shapes.
     """
     accuracy = np.sum(predicted == actual) / len(actual)
     return accuracy
@@ -91,22 +91,21 @@ def compute_confusion_matrix(
     """Compute confusion matrix and get it with indices map for
     classification model predictions.
 
-    :parameter actual: Actual target values
-        :type actual: ndarray
-    :parameter predicted: Predicted target values
-        :type predicted: ndarray
+    :parameter actual: Actual target values.
+        :type actual: :class:`ndarray`
+    :parameter predicted: Predicted target values.
+        :type predicted: :class:`ndarray`
 
-    :keyword indices_map: Dictionary, where keys are features names and values
-        are integer indices in
-        the confusion matrix
-        :type indices_map: IndicesMap
+    :keyword indices_map: Dictionary, where keys are features names and
+    values are integer indices in the confusion matrix.
+        :type indices_map: :class:`IndicesMap`
 
     :returns: Confusion matrix of the model with indicies map, which describes
-        matrix alignment
-        :rtype: ConfusionMatrix
+    matrix alignment.
+        :rtype: :class:`ConfusionMatrix`
 
-    :raises ValueError: If actual and predicted arrays have non-broadcasting
-        shapes
+    :raises ValueError: If actual and predicted arrays have 
+    non-broadcasting shapes.
     """
 
     def _map_to_integers(array, imap):
@@ -143,30 +142,30 @@ def compute_sensitivities_and_specificities(
     """Compute sensitivities and specificities for classification model
     predictions.
 
-    :parameter actual: Actual target values
-        :type actual: ndarray
-    :parameter predicted: Predicted target values
-        :type predicted: ndarray
+    :parameter actual: Actual target values.
+        :type actual: :class:`ndarray`
+    :parameter predicted: Predicted target values.
+        :type predicted: :class:`ndarray`
 
-    :keyword as_array: If ``True`` is passed, function will return regular
-        NumPy `ndarray`, where rows correspond sensitivities to and
-        specificities of features (those correspond to columns); otherwise
-        function will return ``dict`` which describes upper-mentioned
-        alignment explicitly
-        :type as_array: bool
+    :keyword as_array: If :data:`True` is passed, function will return
+    regular NumPy :class:`ndarray`, where rows correspond sensitivities to
+    and specificities of features (those correspond to columns); otherwise
+    function will return :class:`dict` which describes upper-mentioned
+    alignment explicitly.
+        :type as_array: :class:`bool`
 
-    :returns: NumPy ``ndarray`` or dictionary of sensitivities and
-        specificities (depends on `as_array`)
-        :rtype: ndarray
+    :returns: NumPy :class:`ndarray` or dictionary of sensitivities and
+    specificities (depends on `as_array`)
+        :rtype: :class:`ndarray`
 
-    :raises ValueError: If actual and predicted arrays have non-broadcasting
-        shapes
+    :raises ValueError: If actual and predicted arrays have 
+    non-broadcasting shapes.
     """
 
     confusion_matrix, indices_map = compute_confusion_matrix(actual, predicted)
     n_features = len(indices_map)
 
-    sensitivities, specificities = list(), list()
+    sensitivities, specificities = (list(), list())
     for i in range(n_features):
         true_positives = confusion_matrix[i, i]
         false_negatives = np.sum(confusion_matrix[:, i])

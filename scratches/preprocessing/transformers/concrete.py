@@ -2,18 +2,19 @@ from typing import Any
 
 import numpy as np
 from numpy import ndarray
-from numpy import floating
 
 from ._base import BasePreprocessor
 from ..._typing import StrategyOption
 
 
 class ImputingPreprocessor(BasePreprocessor):
-    """ImputingPreprocessor class for imputing missing values in x using
+    """Imputing Preprocessor class for imputing missing values in x using
     specified strategies.
     """
 
-    def __init__(self, strategy: StrategyOption = "mean", copy: bool = True):
+    def __init__(
+        self, strategy: StrategyOption = "mean", copy: bool = True
+    ) -> None:
         super().__init__(copy)
         self.strategy = strategy
         self.fillers: Any
@@ -23,11 +24,14 @@ class ImputingPreprocessor(BasePreprocessor):
         statistics for each feature.
 
         :parameter x: The input features which statistics would be used for
-            imputing;
-            :type x: ndarray
+        imputing.
+            :type x: :class:`ndarray`
         :parameter fill_with: The object to fill missing values with,
-            works when strategy is set to "constant".
-            :type fill_with: Any
+        works when strategy is set to "constant".
+            :type fill_with: :class:`Any`
+
+        :returns: :data:`None`
+            :rtype: :class:`NoneType`
         """
         match self.strategy:
             case "constant":
@@ -45,13 +49,13 @@ class ImputingPreprocessor(BasePreprocessor):
 
     def transform(self, x: ndarray) -> ndarray:
         """Transform the input features using statistics, calculated with the
-        ``fit()`` method.
+        :method:`fit()` method.
 
         :parameter x: The input x to be imputed.
-            :type x: ndarray
+            :type x: :class:`ndarray`
 
         :returns: The x imputed.
-            :rtype: ndarray
+            :rtype: :class:`ndarray`
         """
         if self.copy:
             x = x.copy()
@@ -68,9 +72,9 @@ class ImputingPreprocessor(BasePreprocessor):
 
 
 class MMScalingPreprocessor(BasePreprocessor):
-    """ScalingPreprocessor class for scaling the features using MMScaling."""
+    """Scaling Preprocessor class for scaling the features using MMScaling."""
 
-    def __init__(self, copy: bool = True):
+    def __init__(self, copy: bool = True) -> None:
         super().__init__(copy)
         self.min_values: ndarray
         self.max_values: ndarray
@@ -80,8 +84,11 @@ class MMScalingPreprocessor(BasePreprocessor):
         boundaries for each feature.
 
         :parameter x: The features to fit the preprocessor and compute the
-            boundaries;
+        boundaries.
             :type x: ndarray
+
+        :returns: :data:`None`
+            :rtype: :class:`NoneType`
         """
         self.min_values = np.nanmin(x, axis=0)
         self.max_values = np.nanmax(x, axis=0)
@@ -91,10 +98,10 @@ class MMScalingPreprocessor(BasePreprocessor):
         computed boundaries.
 
         :parameter x: Features to scale and transform.
-            :type x: ndarray
+            :type x: :class:`ndarray`
 
         :return: Scaled features.
-            :rtype: ndarray
+            :rtype: :class:`ndarray`
         """
         if self.copy:
             x = x.copy()
@@ -122,7 +129,9 @@ class MMScalingPreprocessor(BasePreprocessor):
 
 
 class StandardScalingPreprocessor(BasePreprocessor):
-    """StandardScalingPreprocessor class for standard scaling the features."""
+    """Standard Scaling Preprocessor class for standard scaling the
+    features.
+    """
 
     def __init__(self, copy: bool = True):
         super().__init__(copy)
@@ -134,8 +143,8 @@ class StandardScalingPreprocessor(BasePreprocessor):
         standard deviation for each feature.
 
         :parameter x: The features to fit the preprocessor and compute the
-            statistics.
-            :type x: ndarray
+        statistics.
+            :type x: :class:`ndarray`
         """
         self.means = np.nanmean(x, axis=0)
         self.stds = np.nanstd(x, axis=0)
@@ -145,10 +154,10 @@ class StandardScalingPreprocessor(BasePreprocessor):
         to the computed mean and standard deviation.
 
         :parameter x: Features to scale and transform.
-            :type x: ndarray
+            :type x: :class:`ndarray`
 
         :return: Standard scaled features.
-            :rtype: ndarray
+            :rtype: :class:`ndarray`
         """
         if self.copy:
             x = x.copy()

@@ -9,7 +9,7 @@ class BaseEvaluator(ABC):
     networks.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.actual: ndarray
         self.predicted: ndarray
         self.input_gradient: ndarray
@@ -34,14 +34,13 @@ class BaseEvaluator(ABC):
     @abstractmethod
     def _apply(self) -> Any:
         """Abstract method to apply the loss function."""
-        message = "Every loss function must implement ``_apply()`` method"
+        message = "Every loss function must implement `_apply()` method"
         raise NotImplementedError(message)
 
     @abstractmethod
     def _compute_gradient(self) -> Any:
         """Abstract method to compute the gradient of the loss function."""
         message = (
-            "Every loss function must implement ``_compute_gradient()`` "
-            "method"
+            "Every loss function must implement `_compute_gradient()` method"
         )
         raise NotImplementedError(message)

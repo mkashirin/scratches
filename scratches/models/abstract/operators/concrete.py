@@ -7,7 +7,7 @@ from ._base import BaseOperator, ParameterizedOperator
 
 
 class LinearPassageOperator(BaseOperator):
-    """Operator, that passes data in both forward and backward directions."""
+    """Operator that passes data in both forward and backward directions."""
 
     def _apply(self) -> ndarray:
         """Return the input data."""
@@ -19,7 +19,9 @@ class LinearPassageOperator(BaseOperator):
 
 
 class RelUFunctionOperator(BaseOperator):
-    """Operator, that applies rectified linear unit function to the input data."""
+    """Operator that applies rectified linear unit function to the 
+    input data.
+    """
 
     def _apply(self) -> Any:
         """Apply the rectified linear unit function to the input."""
@@ -34,7 +36,7 @@ class RelUFunctionOperator(BaseOperator):
 
 
 class SigmoidFunctionOperator(BaseOperator):
-    """Operator, that applies a sigmoid function to the input data."""
+    """Operator that applies a sigmoid function to the input data."""
 
     def _apply(self) -> ndarray:
         """Apply the sigmoid function to the input data."""
@@ -48,9 +50,9 @@ class SigmoidFunctionOperator(BaseOperator):
 
 
 class TanHFunctionOperator(BaseOperator):
-    """Operator, that applies hyperbolic tangent function to the input data."""
+    """Operator that applies hyperbolic tangent function to the input data."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
     def _apply(self, inference: bool = True) -> ndarray:
@@ -65,9 +67,9 @@ class TanHFunctionOperator(BaseOperator):
 
 
 class BiasAdditionOperator(ParameterizedOperator):
-    """Operator, that adds a bias to the input data."""
+    """Operator that adds a bias to the input data."""
 
-    def __init__(self, bias: ndarray):
+    def __init__(self, bias: ndarray) -> None:
         super().__init__(bias)
 
     def _apply(self) -> ndarray:
@@ -96,9 +98,9 @@ class BiasAdditionOperator(ParameterizedOperator):
 
 
 class WeightedMultiplicationOperator(ParameterizedOperator):
-    """Operator, that multiplies weights by the input data."""
+    """Operator that multiplies weights by the input data."""
 
-    def __init__(self, weights: ndarray):
+    def __init__(self, weights: ndarray) -> None:
         super().__init__(weights)
 
     def _apply(self) -> Any:
@@ -128,12 +130,12 @@ class WeightedMultiplicationOperator(ParameterizedOperator):
 
 
 class DropoutOperator(BaseOperator):
-    """Operator, that implements the Dropout operation. This means, that 
-    is will drop off some neurons at the provided dropout rate. It 
+    """Operator that implements the Dropout operation. This means that 
+    it will drop off some neurons at the provided dropout rate. It 
     actually can reduce the risks of overfitting your models.
     """
 
-    def __init__(self, dropout_rate: float = 0.75):
+    def __init__(self, dropout_rate: float = 0.75) -> None:
         super().__init__()
         self.dropout_rate = dropout_rate
 
@@ -152,9 +154,9 @@ class DropoutOperator(BaseOperator):
 
 
 class ConvolutionOperator(ParameterizedOperator):
-    """Operator, that implements the mathematical convolution operation."""
+    """Operator that implements the mathematical convolution operation."""
 
-    def __init__(self, kernel: ndarray):
+    def __init__(self, kernel: ndarray) -> None:
         super().__init__(kernel)
         self.parameter_size = kernel.shape[2]
         self.parameter_pad = self.parameter_size // 2
@@ -282,13 +284,13 @@ class ConvolutionOperator(ParameterizedOperator):
 
 
 class FlattenOperator(BaseOperator):
-    """Operator, that implements the Flatten operation. FlattenOperator 
+    """Operator that implements the Flatten operation. FlattenOperator 
     is required as the last operator applied in the convolutional neural 
     network if You want to see the human readable results coming out of 
     Your model.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
     def _apply(self, inference: bool = False) -> ndarray:

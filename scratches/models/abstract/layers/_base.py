@@ -18,9 +18,9 @@ class BaseLayer(ABC):
         n_neurons: int,
         weight_initialization: WeightsOption,
         random_seed: Optional[int] = None,
-    ):
-        """Initialize the BaseLayer with the number of neurons and default
-        values for instance variables.
+    ) -> None:
+        """Initialize the :class:`BaseLayer` with the number of neurons and
+        default values for instance variables.
         """
         self.n_neurons = n_neurons
         self.root = True
@@ -38,18 +38,18 @@ class BaseLayer(ABC):
         """Abstract method to set up the layer with the specified number
         of neurons.
         """
-        message = "Every layer should implement the _setup_layer() method."
+        message = "Every layer should implement the `_setup_layer()` method."
         raise NotImplementedError(message)
 
     def feed_forward(self, input_: ndarray) -> ndarray:
-        """Passes the input forward through the layer and returns the 
+        """Passes the input forward through the layer and returns the
         output.
 
-        :parameter input_: The input to the layer
-            :type input_: ndarray
+        :parameter input_: The input to the layer.
+            :type input_: :class:`ndarray`
 
-        :returns: The output of the layer
-            :rtype: ndarray
+        :returns: The output of the layer.
+            :rtype: :class:`ndarray`
         """
         if self.root:
             self._setup_layer(input_.shape[1])
@@ -65,11 +65,11 @@ class BaseLayer(ABC):
         """Propagates the output gradients backward through the layer and
         returns the input gradients.
 
-        :parameter output_gradients: The gradients of the output
-            :type output_gradients: ndarray
+        :parameter output_gradients: The gradients of the output.
+            :type output_gradients: :class:`ndarray`
 
-        :returns: The gradients of the input
-            :rtype: ndarray
+        :returns: The gradients of the input.
+            :rtype: :class:`ndarray`
         """
         input_gradients = output_gradients
         for operator in reversed(self.operators.values()):
@@ -80,7 +80,7 @@ class BaseLayer(ABC):
         return input_gradients
 
     def _compute_parameterized_gradients(self) -> None:
-        """Computes the gradients of the parameterized operators in the 
+        """Computes the gradients of the parameterized operators in the
         layer.
         """
         self.parameters_gradients = dict()
@@ -101,9 +101,7 @@ class BaseLayer(ABC):
             self.operators.keys(), self.operators.values()
         ):
             if issubclass(type(operator), ParameterizedOperator):
-                self.parameters[key] = (
-                    operator.parameter  
-                )
+                self.parameters[key] = operator.parameter
 
     def _get_scale(self, n_features: int) -> float:
         match self.weight_initialization:
