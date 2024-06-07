@@ -155,7 +155,7 @@ def compute_sensitivities_and_specificities(
         :type as_array: :class:`bool`
 
     :returns: NumPy :class:`ndarray` or dictionary of sensitivities and
-    specificities (depends on `as_array`)
+    specificities (depends on :parameter:`as_array`).
         :rtype: :class:`ndarray`
 
     :raises ValueError: If actual and predicted arrays have 
