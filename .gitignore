@@ -1,7 +1,4 @@
-.git
 .ipynb_checkpoints
 .virtual_documents
 
 __pycache__
-
-undodir

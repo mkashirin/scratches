@@ -3,7 +3,9 @@ from typing import Any
 import numpy as np
 from numpy import ndarray
 
+
 from ._base import BasePreprocessor
+
 from ..._typing import StrategyOption
 
 
@@ -13,7 +15,9 @@ class ImputingPreprocessor(BasePreprocessor):
     """
 
     def __init__(
-        self, strategy: StrategyOption = "mean", copy: bool = True
+        self, 
+        strategy: StrategyOption = "mean", 
+        copy: bool = True,
     ) -> None:
         super().__init__(copy)
         self.strategy = strategy
@@ -33,6 +37,7 @@ class ImputingPreprocessor(BasePreprocessor):
         :returns: :data:`None`
             :rtype: :class:`NoneType`
         """
+
         match self.strategy:
             case "constant":
                 self.fillers = np.full(x.shape[1], fill_with)
@@ -45,6 +50,7 @@ class ImputingPreprocessor(BasePreprocessor):
                     f'Expected strategy to be one of "constant", "mean" '
                     f'or "median", but got "{self.strategy}"'
                 )
+
                 raise ValueError(message)
 
     def transform(self, x: ndarray) -> ndarray:
@@ -61,12 +67,15 @@ class ImputingPreprocessor(BasePreprocessor):
             x = x.copy()
 
         nan_mask = np.isnan(x)
+
         x[nan_mask] = np.take(self.fillers, np.where(nan_mask)[1])
         return x
 
     def fit_transform(self, x) -> ndarray:
         """Fit and transform at the same time."""
+
         self.fit(x)
+
         transformed = self.transform(x)
         return transformed
 
@@ -107,11 +116,9 @@ class MMScalingPreprocessor(BasePreprocessor):
             x = x.copy()
 
         range_values = self.max_values - self.min_values
-        nonzero_range_mask, zero_range_mask = self._get_values_masks(
-            range_values
-        )
-
+        (nonzero_range_mask, zero_range_mask) = self._get_values_masks(range_values)
         x[:, zero_range_mask] = 0
+
         x[:, nonzero_range_mask] = (
             x[:, nonzero_range_mask] - self.min_values[nonzero_range_mask]
         ) / np.where(
@@ -123,17 +130,17 @@ class MMScalingPreprocessor(BasePreprocessor):
 
     def fit_transform(self, x) -> ndarray:
         """Fit and transform at the same time."""
+
         self.fit(x)
+
         transformed = self.transform(x)
         return transformed
 
 
-class StandardScalingPreprocessor(BasePreprocessor):
-    """Standard Scaling Preprocessor class for standard scaling the
-    features.
-    """
+class ZScalingPreprocessor(BasePreprocessor):
+    """Z-Scaling Preprocessor class for features standard scaling."""
 
-    def __init__(self, copy: bool = True):
+    def __init__(self, copy: bool = True) -> None:
         super().__init__(copy)
         self.means: ndarray
         self.stds: ndarray
@@ -162,10 +169,10 @@ class StandardScalingPreprocessor(BasePreprocessor):
         if self.copy:
             x = x.copy()
 
-        nonzero_std_mask, zero_std_mask = self._get_values_masks(self.stds)
-        nonzero_mean_mask, _ = self._get_values_masks(self.means)
-
+        (nonzero_std_mask, zero_std_mask) = self._get_values_masks(self.stds)
+        (nonzero_mean_mask, _) = self._get_values_masks(self.means)
         x[:, zero_std_mask] = 0
+
         x[:, nonzero_std_mask] = (
             x[:, nonzero_std_mask] - self.means[nonzero_mean_mask]
         ) / self.stds[nonzero_std_mask]
@@ -173,6 +180,8 @@ class StandardScalingPreprocessor(BasePreprocessor):
 
     def fit_transform(self, x) -> ndarray:
         """Fit and transform at the same time."""
+
         self.fit(x)
+
         transformed = self.transform(x)
         return transformed
