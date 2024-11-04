@@ -18,11 +18,11 @@ Miniconda to manage your Python packages.
 
 Use the Git command-line interface (CLI) to clone this repository into your
 working directory using the following command:
-```
+```bash
 git clone https://github.com/mkashirin/scratches
 ```
 To create a virtual environment, please follow the lines below:
-```
+```bash
 conda init
 conda env create --file="environment.yml" --name="scratches"
 conda activate scratches
@@ -37,7 +37,7 @@ If you wish to change the default path for your environment, you can edit the
 
 After that You can just run the Jupyter sever to access the notebooks from the
 **examples** directory by executing the following command:
-```
+```bash
 jupyter lab
 ```
 And that's it. You are all set!
