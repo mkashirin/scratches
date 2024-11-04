@@ -24,7 +24,7 @@ git clone https://github.com/mkashirin/scratches
 To create a virtual environment, please follow the lines below:
 ```
 conda init
-conda env create --file environment.yml --name scratches
+conda env create --file="environment.yml" --name="scratches"
 conda activate scratches
 ```
 Although NumPy is a crucial dependency for the functioning of the algorithms,
