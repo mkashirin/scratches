@@ -1,4 +1,5 @@
 .ipynb_checkpoints
+.jupyter
 .virtual_documents
 
 __pycache__
